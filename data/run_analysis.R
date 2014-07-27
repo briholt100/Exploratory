@@ -1,0 +1,10 @@
+x<-1:10
+y<-rnorm(10,10)
+y
+x
+tidyDf<-data.frame(cbind(x,y))
+tidyDf
+colnames(tidyDf)<-c("items1_10","normalAroundTen")
+tidyDf
+write.csv(tidyDf,file="./data/foo.txt",sep=",")
+read.csv("./data/foo.txt",sep=",")
