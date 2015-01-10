@@ -1,7 +1,16 @@
+######
+##libraries
+library(dplyr)
+
 getwd()
+
 
 #on campus
 #setwd("I:\\My Data Sources\\mooc\\explore")
+
+#on latitude
+#setwd("/home/brian/Projects/Coursera/Explore")
+
 
 fileUrl <- 'http://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
 if (!file.exists("data")) {
@@ -10,11 +19,9 @@ if (!file.exists("data")) {
 
 # Check if data already exists; if not, download it.
 if (!file.exists('./data/household_power_consumption.zip')) {
- # if(!file.exists('household_power_consumption.zip')) {
     download.file(fileUrl, './data/household_power_consumption.zip', method='wget')
   }
-  unzip('.data/household_power_consumption.zip')
-#}
+unzip('./data/household_power_consumption.zip',exdir="./data")
 
 ######
 ##Read in data  Must decide whether to filter by specific dates
@@ -36,7 +43,7 @@ colnames(temp)<-c(
 
 head(temp)
 str(temp)
-grep("2007",temp[,1] )
+grep("2007",temp$Date )
 
 
 full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";")
