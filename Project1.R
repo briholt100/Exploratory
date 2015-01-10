@@ -1,6 +1,7 @@
 ######
 ##libraries
 library(dplyr)
+library(lubridate)
 
 getwd()
 
@@ -49,4 +50,4 @@ colnames(full)<-c(
 
 
 grep("1/2/2007",full$Date,value=T, fixed=T )
-?grep
+dmy(full$Date)
