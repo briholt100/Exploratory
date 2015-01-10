@@ -29,7 +29,13 @@ unzip('./data/household_power_consumption.zip',exdir="./data")
 
 ####Read random sample to get file structure
 temp<-read.csv("./data/household_power_consumption.txt",header=T,sep=";",nrows=20,skip=3)
-colnames(temp)<-c(
+
+head(temp)
+str(temp)
+
+full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";")
+
+colnames(full)<-c(
   "Date",
   "Time",
   "Global_active_power",
@@ -41,10 +47,6 @@ colnames(temp)<-c(
   "Sub_metering_3"
 )
 
-head(temp)
-str(temp)
-grep("2007",temp$Date )
 
-
-full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";")
-
+grep("1/2/2007",full$Date,value=T, fixed=T )
+?grep
