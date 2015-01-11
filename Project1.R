@@ -43,7 +43,6 @@ useDates<-grep("2007-02-01|2007-02-02",full$DateTime, value=F )
 df<-full[useDates,]
 
 
-
 "For each plot you should
 
 Construct the plot and save it to a PNG file with a width of 480 pixels
@@ -76,10 +75,14 @@ Add the PNG file and R code file to your git repository"
 
 df$Global_active_power<-as.numeric(df$Global_active_power)
 
-hist1<-hist(df$Global_active_power/120, col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)")
 
-objects(hist1)
-(hist1$breaks)
+  hist1<-hist(df$Global_active_power*2/1000, col="red",
+            main="Global Active Power",
+            xlab="Global Active Power (kilowatts)"
+            #,xlim = c(0,2)
+         #   , breaks = 12
+            
+    )
 
 
 
