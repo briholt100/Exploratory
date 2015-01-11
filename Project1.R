@@ -25,18 +25,18 @@ if (!file.exists("data")) {
 }
 
 # Check if data already exists; if not, download it.
-if (!file.exists('./data/household_power_consumption.zip')) {
-    download.file(fileUrl, './data/household_power_consumption.zip', method='wget')
+if (!file.exists('./plot1/data/household_power_consumption.zip')) {
+    download.file(fileUrl, './plot1/data/household_power_consumption.zip', method='wget')
   }
-unzip('./data/household_power_consumption.zip',exdir="./data")
+unzip('./plot1/data/household_power_consumption.zip',exdir="./plot1/data")
 
 ######
 ##Read in data  Must decide whether to filter by specific dates
 #####
 
 ####Read random sample to get file structure
-power <- fread('grep "^[12]/2/2007" ./data/household_power_consumption.txt',na.strings="?")
-temp<-read.csv("./data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
+power <- fread('grep "^[12]/2/2007" ./plot1/data/household_power_consumption.txt',na.strings="?")
+temp<-read.csv("./plot1/data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
 
 
 
@@ -94,7 +94,7 @@ if (!file.exists("images")) {
             xlab="Global Active Power (kilowatts)")
 
 
-dev.copy(png, file = "./images/plot1.png", width = 480, height =480)  ## Copy my plot to a PNG file
+dev.copy(png, file = "./plot1/images/plot1.png", width = 480, height =480)  ## Copy my plot to a PNG file
 dev.off()  ## Don't forget to close the PNG device!
 
 
