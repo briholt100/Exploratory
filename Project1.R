@@ -1,5 +1,8 @@
-######
+#######
 ##libraries
+#######
+library(data.table)
+library(tidyr)
 library(dplyr)
 library(lubridate)
 
@@ -32,15 +35,16 @@ unzip('./data/household_power_consumption.zip',exdir="./data")
 #####
 
 ####Read random sample to get file structure
-
+power <- fread('grep "^[12]/2/2007" ./data/household_power_consumption.txt',na.strings="?")
 temp<-read.csv("./data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
+
 
 
 ###########
 #This will take some processing time
 ###########
 
-full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";")
+full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";", na.strings=c("?",""))
 full$Date<-dmy(full$Date)
 
 ###########
@@ -78,14 +82,14 @@ Add the PNG file and R code file to your git repository"
 #PLOT 1
 #####
 
-Add the PNG file and R code file to your git repository"
+"Add the PNG file and R code file to your git repository"
 
 df$Global_active_power<-as.numeric(df$Global_active_power)
 if (!file.exists("images")) {
   dir.create("images")
 }
 
-  hist1<-hist(df$Global_active_power/500, col="red",
+  hist1<-hist(df$Global_active_power, col="red",
             main="Global Active Power",
             xlab="Global Active Power (kilowatts)")
 
