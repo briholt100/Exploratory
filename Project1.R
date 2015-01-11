@@ -35,10 +35,26 @@ unzip('./data/household_power_consumption.zip',exdir="./data")
 
 temp<-read.csv("./data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
 
+
+###########
+#This will take some processing time
+###########
+
 full<-read.csv("./data/household_power_consumption.txt",header=T,sep=";")
 full$Date<-dmy(full$Date)
+
+###########
+#This will take some processing time
+###########
+
+
 full$DateTime<-paste(full$Date,full$Time)
 full$DateTime<-ymd_hms(full$DateTime)
+
+###########
+#This will take some processing time
+###########
+
 useDates<-grep("2007-02-01|2007-02-02",full$DateTime, value=F )
 df<-full[useDates,]
 
@@ -61,29 +77,21 @@ Add the PNG file and R code file to your git repository"
 #####
 #PLOT 1
 #####
-"Construct the plot and save it to a PNG file with a width of 480 pixels
-and a height of 480 pixels.
-
-Name each of the plot files as plot1.png, plot2.png, etc.
-
-Create a separate R code file (plot1.R, plot2.R, etc.) that constructs 
-the corresponding plot, i.e. code in plot1.R constructs the plot1.png plot. 
-Your code file should include code for reading the data so that the plot can 
-be fully reproduced. You should also include the code that creates the PNG file.
 
 Add the PNG file and R code file to your git repository"
 
 df$Global_active_power<-as.numeric(df$Global_active_power)
+if (!file.exists("images")) {
+  dir.create("images")
+}
 
-
-  hist1<-hist(df$Global_active_power*2/1000, col="red",
+  hist1<-hist(df$Global_active_power/500, col="red",
             main="Global Active Power",
-            xlab="Global Active Power (kilowatts)"
-            #,xlim = c(0,2)
-         #   , breaks = 12
-            
-    )
+            xlab="Global Active Power (kilowatts)")
 
+
+dev.copy(png, file = "./images/plot1.png", width = 480, height =480)  ## Copy my plot to a PNG file
+dev.off()  ## Don't forget to close the PNG device!
 
 
 #####
