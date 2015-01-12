@@ -19,7 +19,7 @@ getwd()
 #setwd("/home/brian/Projects/Coursera/Explore")
 
 
-fileUrl <- 'http://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
+fileUrl <- 'https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
 if (!file.exists("data")) {
   dir.create("data")
 }
@@ -35,8 +35,8 @@ unzip('./plot1/data/household_power_consumption.zip',exdir="./plot1/data")
 #####
 
 ####Read random sample to get file structure
-power <- fread('grep "^[12]/2/2007" ./plot1/data/household_power_consumption.txt',na.strings="?")
-temp<-read.csv("./plot1/data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
+power <- fread('grep "^[12]/2/2007" ./data/household_power_consumption.txt',na.strings="?")
+temp<-read.csv("./data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
 
 
 
