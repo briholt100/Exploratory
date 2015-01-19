@@ -44,6 +44,15 @@ NEI <- readRDS("./data/summarySCC_PM25.rds")
 SCC <- readRDS("./data/Source_Classification_Code.rds")
 str(SCC)
 summary(SCC)
+str(NEI)
+summary(NEI)
+
+table(NEI$year)
+
+NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC")
+NEI$year<-year(NEI$year)
+
+
 ####Is there a way to make this open just the correct fips?
 
 ####Read random sample to get file structure
