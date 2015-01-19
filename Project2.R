@@ -39,8 +39,11 @@ unzip('./data/Emmissions.zip',exdir="./data")
 #This will take some processing time
 ###########
 
-temp<-readRDS("./data/summarySCC_PM25.rds")
 
+NEI <- readRDS("./data/summarySCC_PM25.rds")
+SCC <- readRDS("./data/Source_Classification_Code.rds")
+str(SCC)
+summary(SCC)
 ####Is there a way to make this open just the correct fips?
 
 ####Read random sample to get file structure
