@@ -19,7 +19,7 @@ getwd()
 #setwd("/home/brian/Projects/Coursera/Explore")
 
 
-fileUrl <- 'http://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
+fileUrl <- 'https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip'
 if (!file.exists("data")) {
   dir.create("data")
 }
