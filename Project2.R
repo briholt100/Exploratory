@@ -2,6 +2,7 @@
 ##libraries
 #######
 library(data.table)
+library(reshape2)
 library(tidyr)
 library(dplyr)
 library(lubridate)
@@ -47,10 +48,13 @@ summary(SCC)
 str(NEI)
 summary(NEI)
 
-table(NEI$year)
-
 NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC")
 NEI$year<-year(NEI$year)
+
+names(NEI)
+names(SCC)
+
+df<-merge(NEI,SCC,by.x = "SCC",by.y="SCC")
 
 
 ####Is there a way to make this open just the correct fips?
