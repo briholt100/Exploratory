@@ -48,14 +48,22 @@ summary(SCC)
 str(NEI)
 summary(NEI)
 
-NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC")
-NEI$year<-year(NEI$year)
+NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC") #transform chr to date
+NEI$year<-year(NEI$year) #lubridate to year type
 
 names(NEI)
 names(SCC)
+subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
+######
+#alternatively
+#subSCC<-SCC[,c(1,3)]
 
-df<-merge(NEI,SCC,by.x = "SCC",by.y="SCC")
+df<-merge(NEI,subSCC,by.x = "SCC",by.y="SCC",all=T)
+names(df)
 
+Q1table<-tapply(df$Emissions,df$year,mean)
+plot(Q1table,type="l",ylab="Mean Emissions",xlab="year")
+points(Q1table)
 
 ####Is there a way to make this open just the correct fips?
 
