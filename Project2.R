@@ -61,7 +61,7 @@ subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 df<-merge(NEI,subSCC,by.x = "SCC",by.y="SCC",all=T)
 names(df)
 
-Q1table<-tapply(df$Emissions,df$year,mean)
+Q1table<-tapply(df$Emissions/1000,df$year,sum)
 plot(Q1table,type="l",ylab="Mean Emissions",xlab="year")
 points(Q1table)
 
