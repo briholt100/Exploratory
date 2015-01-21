@@ -43,16 +43,21 @@ unzip('./data/Emmissions.zip',exdir="./data")
 
 NEI <- readRDS("./data/summarySCC_PM25.rds")
 SCC <- readRDS("./data/Source_Classification_Code.rds")
-str(SCC)
-summary(SCC)
-str(NEI)
-summary(NEI)
 
 NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC") #transform chr to date
 NEI$year<-year(NEI$year) #lubridate to year type
 
-names(NEI)
-names(SCC)
+Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
+plot(Q1table,type="l",ylab="Mean Emissions",xlab="year")  ####must change x axes
+points(Q1table)
+
+
+############Must clean up my subsetting############
+
+Q2table<-tapply(NEI$Emissions[NEI$fips == 24510,]/1000,NEI$year,sum)
+plot(Q2table,type="l",ylab="Mean Emissions",xlab="year",main = "Emissions for Baltimore, MD")
+points(Q2table)
+
 subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 ######
 #alternatively
@@ -61,11 +66,7 @@ subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 df<-merge(NEI,subSCC,by.x = "SCC",by.y="SCC",all=T)
 names(df)
 
-Q1table<-tapply(df$Emissions/1000,df$year,sum)
-plot(Q1table,type="l",ylab="Mean Emissions",xlab="year")
-points(Q1table)
 
-####Is there a way to make this open just the correct fips?
 
 ####Read random sample to get file structure
 power <- fread('grep "^[12]/2/2007" ./data/household_power_consumption.txt',na.strings="?")
