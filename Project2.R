@@ -48,15 +48,22 @@ NEI$year<-strptime(NEI$year,format = "%Y", tz="UTC") #transform chr to date
 NEI$year<-year(NEI$year) #lubridate to year type
 
 Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
-plot(Q1table,type="l",ylab="Mean Emissions",xlab="year")  ####must change x axes
-points(Q1table)
+tableNames<-names(Q1table)
+plot(Q1table,type="l",ylab="Total Emissions",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n") 
+axis(1,1:4,c("1999", "2002", "2005", "2008"))
+points(Q1table,col="blue",pch=19)
 
 
-############Must clean up my subsetting############
 
-Q2table<-tapply(NEI$Emissions[NEI$fips == 24510,]/1000,NEI$year,sum)
-plot(Q2table,type="l",ylab="Mean Emissions",xlab="year",main = "Emissions for Baltimore, MD")
-points(Q2table)
+Q2table<-tapply(NEI$Emissions[NEI$fips == 24510]/1000,NEI$year[NEI$fips == 24510],sum)
+plot(Q2table,type="l",ylab="Total Emissions",xlab="Year",main = "Emissions for Baltimore, MD",xaxt = "n")
+axis(1,1:4,c("1999", "2002", "2005", "2008"))
+points(Q2table,col="blue",pch=19)
+
+
+
+
+
 
 subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 ######
