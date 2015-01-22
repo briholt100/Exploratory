@@ -7,6 +7,7 @@ library(tidyr)
 library(dplyr)
 library(lubridate)
 library(ggplot2)
+library(lattice)
 getwd()
 
 
