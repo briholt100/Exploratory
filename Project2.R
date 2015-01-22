@@ -53,7 +53,10 @@ NEI$year<-year(NEI$year) #lubridate to year type
 
 p<-ggplot(NEI,aes(y=Emissions))
 p+geom_boxplot()
-boxplot(NEI$Emissions[NEI$Emissions<120000])
+BoxEm<-boxplot(NEI$Emissions)
+plot(NEI$Emissions)
+
+
 
 Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
 tableNames<-names(Q1table)
