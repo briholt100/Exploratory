@@ -88,8 +88,9 @@ if (!file.exists("images")) {
 #####################
 #Create histogram
 #####################
+png(file ="./images/plot1a.png",bg="transparent")
 
-hist1<-hist(df2$Global_active_power, col="red",
+hist1<-hist(df$Global_active_power, col="red",
             main="Global Active Power",
             xlab="Global Active Power (kilowatts)")
 
