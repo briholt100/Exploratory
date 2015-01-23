@@ -32,6 +32,9 @@ if (!file.exists('./data/Emmissions.zip')) {
 }
 unzip('./data/Emmissions.zip',exdir="./data")
 
+if (!file.exists("images")) {
+  dir.create("images")
+}
 
 ######
 ##Read in data  Must decide whether to filter by specific conditions
@@ -67,20 +70,46 @@ boxplot(NEI$Emissions~NEI$year,outline=F)
 
 
 
+
+
+#####################
+#Create line chart
+#####################
 Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
-tableNames<-names(Q1table)
+png(file ="./images/Q1.png",bg="white")
+
 plot(Q1table,type="l",ylab="Total Emissions",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n")
 axis(1,1:4,c("1999", "2002", "2005", "2008"))
 points(Q1table,col="blue",pch=19)
 
+#####################
+#Copy screen device output to png, saved in ./images/ with w,h at 480 pixels
+#####################
+
+dev.off()  ## Don't forget to close the PNG device!
 
 
+
+
+
+
+
+
+#####################
+#Create line chart
+#####################
 Q2table<-tapply(NEI$Emissions[NEI$fips == 24510]/1000,NEI$year[NEI$fips == 24510],sum)
+png(file ="./images/Q2.png",bg="white")
+
 plot(Q2table,type="l",ylab="Total Emissions",xlab="Year",main = "Emissions for Baltimore, MD",xaxt = "n")
 axis(1,1:4,c("1999", "2002", "2005", "2008"))
 points(Q2table,col="blue",pch=19)
 
+#####################
+#Copy screen device output to png, saved in ./images/ with w,h at 480 pixels
+#####################
 
+dev.off()  ## Don't forget to close the PNG device!
 
 
 
