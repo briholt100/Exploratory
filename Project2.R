@@ -63,7 +63,7 @@ bxp(BoxEm)  # this will plot without any outlier points
 
 plot(NEI$Emissions)
 hist(NEI$Emissions,breaks= 20)
-boxplot(NEI$Emissions,outline=F)
+boxplot(NEI$Emissions~NEI$year,outline=F)
 
 
 
