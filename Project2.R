@@ -51,7 +51,7 @@ NEI$year<-year(NEI$year) #lubridate to year type
 
 ###################look for outliers###########################
 
-p<-ggplot(NEI,aes(y=Emissions))
+p<-ggplot(NEI,aes(y=log(Emissions+1)))
 p+geom_boxplot()
 BoxEm<-boxplot(NEI$Emissions)
 objects(BoxEm)
@@ -62,7 +62,8 @@ BoxEm$group <- NULL
 bxp(BoxEm)  # this will plot without any outlier points
 
 plot(NEI$Emissions)
-hist(NEI$Emissions)
+hist(NEI$Emissions,breaks= 20)
+boxplot(NEI$Emissions,outline=F)
 
 
 
