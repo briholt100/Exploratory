@@ -78,7 +78,7 @@ boxplot(NEI$Emissions~NEI$year,outline=F)
 Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
 png(file ="./images/Q1.png",bg="white")
 
-plot(Q1table,type="l",ylab="Total Emissions",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n")
+plot(Q1table,type="l",ylab="Total Emissions by 1000 tons",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n")
 axis(1,1:4,c("1999", "2002", "2005", "2008"))
 points(Q1table,col="blue",pch=19)
 
