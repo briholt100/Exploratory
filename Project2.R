@@ -30,7 +30,7 @@ if (!file.exists("data")) {
 if (!file.exists('./data/Emmissions.zip')) {
   download.file(fileUrl, './data/Emmissions.zip', method='wget')
 }
-unzip('./data/Emmissions.zip',exdir="./data")
+unzip('.data/Emmissions.zip',exdir="./data")
 
 if (!file.exists("images")) {
   dir.create("images")
@@ -69,16 +69,13 @@ hist(NEI$Emissions,breaks= 20)
 boxplot(NEI$Emissions~NEI$year,outline=F)
 
 
-
-
-
 #####################
 #Create line chart
 #####################
 Q1table<-tapply(NEI$Emissions/1000,NEI$year,sum)
 png(file ="./images/Q1.png",bg="white")
 
-plot(Q1table,type="l",ylab="Total Emissions by 1000 tons",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n")
+plot(Q1table,type="b",ylab="Total Emissions by 1000 tons",xlab="Year",main="U.S. Total Emissions by Year",xaxt = "n")
 axis(1,1:4,c("1999", "2002", "2005", "2008"))
 points(Q1table,col="blue",pch=19)
 
