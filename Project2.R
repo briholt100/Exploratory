@@ -115,7 +115,7 @@ dev.off()  ## Don't forget to close the PNG device!
 #Create ggplot chart
 #####################
 
-df3<-subset(NEI, fips == 24510, select = c(Emissions, year, type)) 
+df3<-subset(NEI, fips == 24510, select = c(Emissions, year, type))
 nrow(df3)
 final<-melt(df3, id=c("year", "type"), measure.vars=c("Emissions"))
 head(final)
@@ -141,26 +141,47 @@ dev.off()  ## Don't forget to close the PNG device!
 #Q4
 #####################
 
-#Across the United States, how have emissions from coal combustion-related 
+#Across the United States, how have emissions from coal combustion-related
 #sources changed from 1999–2008?
 #
-#
+str(SCC)
 
-#merge SCC and NEI by NEI$SCC and SCC$SCC.  select short.name from scc
-#grep coal from short name?  Possibly use cross walk
+coal3<-grep("coal", SCC$SCC.Level.Three, ignore.case=T,value=F)
+coal<-grep("coal", SCC$Short.Name, ignore.case=T, value=F)
+SCC_coal<-subset(SCC[coal3,],select=c("SCC","Short.Name"))
 
-#subset by the grep'd item, redo #1
-#subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
-######
-#alternatively
-#subSCC<-SCC[,c(1,3)]
+NEI_SCC_coal<-merge(NEI,SCC_coal,by.x="SCC",by.y="SCC")
+
+#####################
+#Create line chart
+#####################
+#I decided to try grep'ingdfor coal in Short.Name, and then by Level.Three.
+#I stuck with Level.3
+
+Q4table<-tapply(NEI_SCC_coal$Emissions/1000,NEI_SCC_coal$year,sum)
+png(file ="./images/Q4.png",bg="white")
+
+plot(Q4table,type="b",ylab="Total Emissions by 1000 tons",xlab="Year"
+     , main="U.S. Coal Emissions by Year", xaxt = "n")
+axis(1,1:4,c("1999", "2002", "2005", "2008"))
+points(Q4table,col="blue",pch=19)
+
+#####################
+#Copy screen device output to png, saved in ./images/ with w,h at 480 pixels
+#####################
+
+dev.off()  ## Don't forget to close the PNG device!
+
+
+
+
 
 
 #####################
 #Q5
 #####################
 
-#How have emissions from motor vehicle sources changed from 
+#How have emissions from motor vehicle sources changed from
 #1999–2008 in Baltimore City?
 
 #Repeat #3, but use short.name to find motor vehicles?
@@ -169,13 +190,25 @@ length(grep("motor",SCC$Short.Name,ignore.case=T,value=T))
 head(SCC[grep("highway",SCC$Short.Name,ignore.case=T,value=F),])
 
 length(grep("veh",SCC$Short.Name,ignore.case=T,value=T))
+
+table(SCC$SCC.Level.Two)
+
+tail(SCC[grep("vehicle",SCC$SCC.Level.Two,ignore.case=T),],20)
+
+subset(SCC,select = c("SCC","Short.Name",))
+
+
+
+
+
+
 #####################
 #Q6
 #####################
 
-#Compare emissions from motor vehicle sources in Baltimore City with 
-#emissions from motor vehicle sources in 
-#Los Angeles County, California (fips == "06037"). Which city has seen 
+#Compare emissions from motor vehicle sources in Baltimore City with
+#emissions from motor vehicle sources in
+#Los Angeles County, California (fips == "06037"). Which city has seen
 #greater changes over time in motor vehicle emissions?
 #
 #
