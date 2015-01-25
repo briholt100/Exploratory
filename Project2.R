@@ -111,6 +111,51 @@ dev.off()  ## Don't forget to close the PNG device!
 
 
 
+#####################
+#Create ggplot chart
+#####################
+
+df3<-subset(NEI, fips == 24510, select = c(Emissions, year, type)) 
+nrow(df3)
+final<-melt(df3, id=c("year", "type"), measure.vars=c("Emissions"))
+head(final)
+sum(final$value)
+
+final<-(dcast(final,year+type~variable,sum))
+
+
+Q3ggplot<-ggplot(data=final, aes(x=year, y=Emissions ,group=type,color=type))
+summary(Q3ggplot)
+png(file ="./images/Q3.png",bg="white",width = 960, height =480)
+Q3ggplot+geom_line()+geom_point()+facet_wrap(~type,nrow = 1, ncol = 4)+ylab("Emissions, Tons/1000") + ggtitle("Baltimore, MD PM2.5 Emissions by Year, color by Type")
+
+
+#####################
+#Copy screen device output to png, saved in ./images/ with w,h at 480 pixels
+#####################
+
+dev.off()  ## Don't forget to close the PNG device!
+
+
+#####################
+#Q4
+#####################
+
+#####################Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 ######
 #alternatively
