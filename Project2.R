@@ -163,6 +163,12 @@ dev.off()  ## Don't forget to close the PNG device!
 #How have emissions from motor vehicle sources changed from 
 #1999–2008 in Baltimore City?
 
+#Repeat #3, but use short.name to find motor vehicles?
+length(grep("motor",SCC$Short.Name,ignore.case=T,value=T))
+
+head(SCC[grep("highway",SCC$Short.Name,ignore.case=T,value=F),])
+
+length(grep("veh",SCC$Short.Name,ignore.case=T,value=T))
 #####################
 #Q6
 #####################
