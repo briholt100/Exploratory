@@ -141,37 +141,41 @@ dev.off()  ## Don't forget to close the PNG device!
 #Q4
 #####################
 
-#####################Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+#Across the United States, how have emissions from coal combustion-related 
+#sources changed from 1999–2008?
+#
+#
 
+#merge SCC and NEI by NEI$SCC and SCC$SCC.  select short.name from scc
+#grep coal from short name?  Possibly use cross walk
 
-
-
-
-
-
-
-
-
-
-
-
-
-subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
+#subset by the grep'd item, redo #1
+#subSCC<-(subset(SCC,select =c("SCC","Short.Name"))) ##pulls just the 2 columns
 ######
 #alternatively
 #subSCC<-SCC[,c(1,3)]
 
-df<-merge(NEI,subSCC,by.x = "SCC",by.y="SCC",all=T)
-names(df)
+
+#####################
+#Q5
+#####################
+
+#How have emissions from motor vehicle sources changed from 
+#1999–2008 in Baltimore City?
+
+#####################
+#Q6
+#####################
+
+#Compare emissions from motor vehicle sources in Baltimore City with 
+#emissions from motor vehicle sources in 
+#Los Angeles County, California (fips == "06037"). Which city has seen 
+#greater changes over time in motor vehicle emissions?
+#
+#
 
 
 
-####Read random sample to get file structure
-power <- fread('grep "^[12]/2/2007" ./data/household_power_consumption.txt',na.strings="?")
-temp<-read.csv("./data/household_power_consumption.txt", header = TRUE, sep=";", nrows=20)
 
 
 
-###########
-#This will take some processing time
-###########
