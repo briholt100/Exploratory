@@ -6,6 +6,9 @@ library(tidyr)
 library(dplyr)
 library(lubridate)
 library(ggplot2)
+# see http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
+# for faceting examples
+
 getwd()
 
 
@@ -130,7 +133,7 @@ Q3ggplot<-ggplot(data=final, aes(x=year, y=Emissions ,group=type,color=type))
 summary(Q3ggplot)
 png(file ="./images/Q3.png",bg="white",width = 960, height =480)
 Q3ggplot+geom_line()+geom_point()+facet_wrap(~type,nrow = 1, ncol = 4)+
-  ylab("Emissions, Tons/1000") + 
+  ylab("Emissions, Tons/1000") +
   ggtitle("Baltimore, MD PM2.5 Emissions by Year, color by Type")
 
 
@@ -209,7 +212,7 @@ final<-(dcast(final,year~variable,sum))
 Q5ggplot<-ggplot(data=final, aes(x=year, y=Emissions))
 summary(Q5ggplot)
 png(file ="./images/Q5.png",bg="white",width = 480, height =480)
-Q5ggplot+geom_line()+geom_point()+ylab("Emissions, Tons/1000")+ 
+Q5ggplot+geom_line()+geom_point()+ylab("Emissions, Tons/1000")+
   ggtitle("Baltimore, MD Motor Emissions by Year")
 #####################
 #Copy screen device output to png, saved in ./images/ with w,h at 480 pixels
@@ -234,7 +237,7 @@ df5=NEI[NEI$fips=="24510"|NEI$fips=="06037",c(1:2,4:6)]
 
 #change fips # to County Name
 df5$fips<-with(df5, ifelse(df5$fips=="24510","Baltimore, MD","Los Angeles, CA"))
-                  
+
 
 ##Grep out vehicles and motors from SCC short.name
 motor_veh_grep<-grep("veh|motor", SCC$Short.Name,ignore.case=T,value=F)
@@ -256,7 +259,7 @@ head(final)
 Q6ggplot<-ggplot(data=final, aes(x=year, y=Emissions,color=fips))
 Q6ggplot+geom_line()+geom_point()+facet_wrap(~EI.Sector,ncol = 4)+
   guides(col = guide_legend(reverse = TRUE))+
-  ylab("Emissions, Tons/1000")+ 
+  ylab("Emissions, Tons/1000")+
   ggtitle("LA County, CA vs. Baltimore, MD \nOnroad Motor Emissions by Year")
 
 
